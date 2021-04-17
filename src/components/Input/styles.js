@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primaryBlue,
     borderWidth: 2,
     padding: normalize(5),
+    color: colors.white,
   },
   label: {
     marginBottom: normalize(5),

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: !clear ? colors.primaryBlue : "transparent",
     borderRadius: metrics.radius,
-    padding: normalize(15),
+    padding: normalize(10),
     justifyContent: "center",
     alignItems: "center",
   }),

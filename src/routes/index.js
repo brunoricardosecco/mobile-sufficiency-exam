@@ -44,8 +44,16 @@ export default function Routes() {
             },
           }}
         >
-          <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{ title: "Login" }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{ title: "Cadastro" }}
+          />
         </Stack.Navigator>
       )}
     </NavigationContainer>

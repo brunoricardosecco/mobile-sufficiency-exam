@@ -9,10 +9,11 @@ export default function Button({
   textStyle,
   children,
   isLoading,
+  style,
   ...rest
 }) {
   return (
-    <TouchableOpacity style={styles.button(clear)} {...rest}>
+    <TouchableOpacity style={[styles.button(clear), style]} {...rest}>
       {!isLoading ? (
         children ? (
           children
