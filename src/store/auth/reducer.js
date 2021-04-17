@@ -55,20 +55,17 @@ export default function reducer(state = INITIAL_STATE, action) {
   }
 }
 
-export const signIn = ({ email, password }) => ({
+export const signIn = (values) => ({
   type: Types.SIGN_IN_ASYNC,
   payload: {
-    email,
-    password,
+    ...values,
   },
 });
 
-export const signUp = ({ email, password, confirmPassword }) => ({
+export const signUp = (values) => ({
   type: Types.SIGN_UP_ASYNC,
   payload: {
-    email,
-    password,
-    confirmPassword,
+    ...values,
   },
 });
 

@@ -26,19 +26,21 @@ export default function ListItem({ item }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Text style={styles.title}>{`${item.name} - genero`}</Text>
-        <Text>{`R$${item.price.toFixed(2)}`}</Text>
-      </View>
+      <Text style={styles.title}>{`${item.name} - genero`}</Text>
+
+      <Text style={styles.label}>{`R$${item.price.toFixed(2)}`}</Text>
+
       <Text style={styles.label}>
         Quantidade de páginas: <Text style={styles.value}>{item.qtdPages}</Text>
       </Text>
+
       <Text style={styles.label}>
         Data de lançamento:{' '}
         <Text style={styles.value}>
           {dayjs(item.releaseDate).format('DD/MM/YYYY')}
         </Text>
       </Text>
+
       {isShowingResume && (
         <View>
           <Text style={styles.label}>Resumo</Text>
