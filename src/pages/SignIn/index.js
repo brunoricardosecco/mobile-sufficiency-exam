@@ -1,34 +1,45 @@
-import React, { useState } from "react";
-import { Text, View, Alert } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import React, { useState, useCallback } from 'react';
+import { Text, View, Alert } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useDispatch } from 'react-redux';
 
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import { signIn } from '../../store/auth/reducer';
 
-import styles from "./styles";
-import { normalize } from "../../helpers";
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import { normalize } from '../../helpers';
+
+import styles from './styles';
 
 export default function SignIn({ navigation }) {
+  //* STATES
   const [fields, setFields] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
-  const handleFillField = (name, value) => {
+  // * ACTIONS
+  const dispatch = useDispatch();
+  const signInAsync = useCallback((values) => dispatch(signIn(values)), [
+    dispatch,
+  ]);
+
+  // * FUNCTIONS
+  const handleFillField = useCallback((name, value) => {
     setFields((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-  };
+  }, []);
 
-  const handleSubmit = () => {
-    if (fields.email === "" || fields.password === "") {
+  const handleSubmit = useCallback(() => {
+    if (fields.email === '' || fields.password === '') {
       Alert.alert(
-        "Campo vazio",
-        "Por favor, preencha todos os campos para entrar no aplicativo.",
+        'Campo vazio',
+        'Por favor, preencha todos os campos para entrar no aplicativo.',
         [
           {
-            text: "Beleza",
+            text: 'Beleza',
           },
         ]
       );
@@ -36,17 +47,17 @@ export default function SignIn({ navigation }) {
     }
 
     console.log({ fields });
-  };
+  }, [fields]);
 
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <KeyboardAwareScrollView
-          style={{ flex: 1, width: "100%" }}
+          style={{ flex: 1, width: '100%' }}
           contentContainerStyle={{
             flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <Text style={styles.title}>LibApp</Text>
@@ -71,7 +82,7 @@ export default function SignIn({ navigation }) {
             text="Preciso me cadastrar"
             clear
             style={{ marginTop: normalize(10) }}
-            onPress={() => navigation.navigate("SignUp")}
+            onPress={() => navigation.navigate('SignUp')}
           />
         </KeyboardAwareScrollView>
       </View>

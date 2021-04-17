@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
-import { colors, metrics } from "../../constants";
+import { StyleSheet } from 'react-native';
+import { colors, metrics } from '../../constants';
 
-import { normalize } from "../../helpers";
+import { normalize } from '../../helpers';
 
 const styles = StyleSheet.create({
   container: {

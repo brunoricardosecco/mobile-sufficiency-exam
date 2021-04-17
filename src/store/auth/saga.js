@@ -1,6 +1,6 @@
-import { put, call } from "redux-saga/effects";
+import { put } from 'redux-saga/effects';
 
-import { Types as authTypes } from "./reducer";
+import { Types as authTypes } from './reducer';
 
 export function* signIn({ payload }) {
   try {

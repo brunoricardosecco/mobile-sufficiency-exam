@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { Text, View, Alert } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import React, { useState } from 'react';
+import { Text, View, Alert } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import styles from "./styles";
-import { normalize } from "../../helpers";
+import styles from './styles';
+import { normalize } from '../../helpers';
 
 export default function SignUp({ navigation }) {
   const [fields, setFields] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const handleFillField = (name, value) => {
@@ -24,16 +24,16 @@ export default function SignUp({ navigation }) {
 
   const handleSubmit = () => {
     if (
-      fields.email === "" ||
-      fields.password === "" ||
-      fields.confirmPassword === ""
+      fields.email === '' ||
+      fields.password === '' ||
+      fields.confirmPassword === ''
     ) {
       Alert.alert(
-        "Campo vazio",
-        "Por favor, preencha todos os campos para entrar no aplicativo",
+        'Campo vazio',
+        'Por favor, preencha todos os campos para entrar no aplicativo',
         [
           {
-            text: "Beleza",
+            text: 'Beleza',
           },
         ]
       );
@@ -42,11 +42,11 @@ export default function SignUp({ navigation }) {
 
     if (fields.password !== fields.confirmPassword) {
       Alert.alert(
-        "Campo diferentes",
-        "A confirmação de senha deve ser igual a senha",
+        'Campo diferentes',
+        'A confirmação de senha deve ser igual a senha',
         [
           {
-            text: "Beleza",
+            text: 'Beleza',
           },
         ]
       );
@@ -60,11 +60,11 @@ export default function SignUp({ navigation }) {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <KeyboardAwareScrollView
-          style={{ flex: 1, width: "100%" }}
+          style={{ flex: 1, width: '100%' }}
           contentContainerStyle={{
             flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <Text style={styles.title}>LibApp</Text>

@@ -1,12 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from "../pages/Home";
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
-import colors from "../constants/colors";
+import Home from '../pages/Home';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
+import colors from '../constants/colors';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -21,10 +21,10 @@ export default function Routes() {
             headerStyle: {
               backgroundColor: colors.primaryBlue,
             },
-            headerTintColor: "#fff",
+            headerTintColor: '#fff',
             headerTitleStyle: {
-              fontWeight: "bold",
-              alignSelf: "center",
+              fontWeight: 'bold',
+              alignSelf: 'center',
             },
           }}
         >
@@ -37,22 +37,22 @@ export default function Routes() {
             headerStyle: {
               backgroundColor: colors.primaryBlue,
             },
-            headerTintColor: "#fff",
+            headerTintColor: '#fff',
             headerTitleStyle: {
-              fontWeight: "bold",
-              alignSelf: "center",
+              fontWeight: 'bold',
+              alignSelf: 'center',
             },
           }}
         >
           <Stack.Screen
             name="SignIn"
             component={SignIn}
-            options={{ title: "Login" }}
+            options={{ title: 'Login' }}
           />
           <Stack.Screen
             name="SignUp"
             component={SignUp}
-            options={{ title: "Cadastro" }}
+            options={{ title: 'Cadastro' }}
           />
         </Stack.Navigator>
       )}

@@ -1,19 +1,19 @@
-import { StyleSheet } from "react-native";
-import { colors, metrics } from "../../constants";
-import { normalize } from "../../helpers";
+import { StyleSheet } from 'react-native';
+import { colors, metrics } from '../../constants';
+import { normalize } from '../../helpers';
 
 const styles = StyleSheet.create({
   button: (clear) => ({
-    width: "100%",
-    backgroundColor: !clear ? colors.primaryBlue : "transparent",
+    width: '100%',
+    backgroundColor: !clear ? colors.primaryBlue : 'transparent',
     borderRadius: metrics.radius,
     padding: normalize(10),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   }),
   buttonText: (clear) => ({
     color: clear ? colors.primaryBlue : colors.white,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   }),
 });
 

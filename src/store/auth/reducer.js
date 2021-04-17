@@ -1,7 +1,7 @@
 export const Types = {
-  LOGIN_ASYNC: "auth/LOGIN_ASYNC",
-  LOGIN_SUCCESS: "auth/LOGIN_SUCCESS",
-  LOGIN_ERROR: "auth/LOGIN_ERROR",
+  LOGIN_ASYNC: 'auth/LOGIN_ASYNC',
+  LOGIN_SUCCESS: 'auth/LOGIN_SUCCESS',
+  LOGIN_ERROR: 'auth/LOGIN_ERROR',
 };
 
 const INITIAL_STATE = {

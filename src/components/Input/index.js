@@ -1,10 +1,10 @@
-import React from "react";
-import { TextInput, View, Text } from "react-native";
-import styles from "./styles";
+import React from 'react';
+import { TextInput, View, Text } from 'react-native';
+import styles from './styles';
 
 export default function Input({
-  label = "",
-  name = "",
+  label = '',
+  name = '',
   onChangeText,
   ...rest
 }) {

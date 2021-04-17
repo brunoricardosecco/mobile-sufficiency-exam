@@ -1,8 +1,8 @@
-import { all, takeLatest } from "redux-saga/effects";
+import { all, takeLatest } from 'redux-saga/effects';
 
-import { Types as authTypes } from "./auth/reducer";
+import { Types as authTypes } from './auth/reducer';
 
-import * as auth from "./auth/saga";
+import * as auth from './auth/saga';
 
 function* watchAsyncAuth() {
   yield takeLatest(authTypes.LOGIN_ASYNC, auth.signIn);
