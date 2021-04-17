@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../pages/Home';
+import BottomTabMenu from './BottomTabMenu';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import colors from '../constants/colors';
@@ -16,20 +16,7 @@ export default function Routes() {
   return (
     <NavigationContainer>
       {isLogged ? (
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: colors.primaryBlue,
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              alignSelf: 'center',
-            },
-          }}
-        >
-          <Stack.Screen name="Home" component={Home} />
-        </Stack.Navigator>
+        <BottomTabMenu />
       ) : (
         <Stack.Navigator
           initialRouteName="SignIn"

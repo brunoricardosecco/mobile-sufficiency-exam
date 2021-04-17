@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
-import auth from './auth/reducer';
+import auth, { Types as authTypes } from './auth/reducer';
 
 const reducers = combineReducers({
   auth,
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === 'auth/LOGOUT') {
+  if (action.type === authTypes.SIGN_OUT) {
     state = undefined;
   }
 

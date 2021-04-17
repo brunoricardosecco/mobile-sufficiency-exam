@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Text, View, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { signIn } from '../../store/auth/reducer';
 
@@ -17,6 +17,7 @@ export default function SignIn({ navigation }) {
     email: '',
     password: '',
   });
+  const { isLoading } = useSelector((states) => states.auth);
 
   // * ACTIONS
   const dispatch = useDispatch();
@@ -46,8 +47,8 @@ export default function SignIn({ navigation }) {
       return;
     }
 
-    console.log({ fields });
-  }, [fields]);
+    signInAsync(fields);
+  }, [fields, signInAsync]);
 
   return (
     <View style={styles.container}>
@@ -77,6 +78,7 @@ export default function SignIn({ navigation }) {
             text="Bora"
             style={{ marginTop: normalize(10) }}
             onPress={handleSubmit}
+            isLoading={isLoading}
           />
           <Button
             text="Preciso me cadastrar"
