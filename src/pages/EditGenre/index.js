@@ -15,7 +15,6 @@ export default function EditGenre() {
   const {
     params: { genre },
   } = route;
-  console.log(genre);
 
   // * ACTIONS
   const dispatch = useDispatch();
@@ -27,9 +26,9 @@ export default function EditGenre() {
   // * FUNCTIONS
   const handleSubmit = useCallback(
     (values) => {
-      updateGenreAsync(values);
+      updateGenreAsync({ ...values, id: genre.id });
     },
-    [updateGenreAsync]
+    [genre.id, updateGenreAsync]
   );
 
   return (

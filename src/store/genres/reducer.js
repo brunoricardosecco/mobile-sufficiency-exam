@@ -64,7 +64,7 @@ export default function reducer(state = INITIAL_STATE, action) {
       const { updatedGenre } = action.payload;
 
       const newList = state.genres.map((genre) => {
-        if (genre.id === updatedGenre) {
+        if (genre.id === updatedGenre.id) {
           return updatedGenre;
         }
 

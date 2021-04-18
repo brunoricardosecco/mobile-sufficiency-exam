@@ -18,7 +18,6 @@ export function* getGenres() {
       });
     });
 
-    console.log({ genres });
     yield put({
       type: genresTypes.GET_GENRES_SUCCESS,
       payload: {
@@ -26,7 +25,6 @@ export function* getGenres() {
       },
     });
   } catch (error) {
-    console.log(error);
     yield put({
       type: genresTypes.GET_GENRES_ERROR,
     });
@@ -35,13 +33,8 @@ export function* getGenres() {
 
 export function* addGenre({ payload }) {
   try {
-    console.log('CHEGEEEEEU');
     const res = yield firebase.db.collection('genres').add({
       ...payload,
-    });
-
-    console.log({
-      id: res.id,
     });
 
     yield put({
@@ -63,10 +56,17 @@ export function* addGenre({ payload }) {
 
 export function* updateGenre({ payload }) {
   try {
-    console.log({ payload });
+    const res = yield firebase.db.collection('genres').doc(payload.id).update({
+      name: payload.name,
+    });
+
     yield put({
       type: genresTypes.UPDATE_GENRE_SUCCESS,
+      payload: {
+        updatedGenre: payload,
+      },
     });
+    navigationRef.current.goBack();
   } catch (error) {
     yield put({
       type: genresTypes.UPDATE_GENRE_ERROR,
