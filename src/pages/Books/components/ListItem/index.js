@@ -17,7 +17,6 @@ import { colors, metrics } from '../../../../constants';
 import styles from './styles';
 
 export default function ListItem({ item, navigation }) {
-  console.log(item);
   // * STATES
   const [isShowingResume, setIsShowingResume] = useState(false);
   const { isLoading } = useSelector((state) => state.books);
@@ -46,7 +45,7 @@ export default function ListItem({ item, navigation }) {
         {
           text: 'Sim',
           style: 'default',
-          onPress: () => deleteBookAsync(bookId),
+          onPress: () => deleteBookAsync({ bookId }),
         },
       ]
     );
@@ -65,7 +64,7 @@ export default function ListItem({ item, navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>{`${item.name} - ${item.genre?.name}`}</Text>
 
-      <Text style={styles.label}>{`R$${item.price.toFixed(2)}`}</Text>
+      <Text style={styles.label}>{`R$${item.price}`}</Text>
 
       <Text style={styles.label}>
         Quantidade de páginas: <Text style={styles.value}>{item.qtdPages}</Text>

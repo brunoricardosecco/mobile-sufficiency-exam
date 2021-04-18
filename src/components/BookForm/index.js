@@ -29,6 +29,7 @@ export default function BookForm({
 
   // * FUNCTIONS
   const handleFillField = useCallback((name, value) => {
+    console.log({ name, value });
     setFields((prevState) => ({
       ...prevState,
       [name]: value,
@@ -36,6 +37,7 @@ export default function BookForm({
   }, []);
 
   const onSubmit = useCallback(() => {
+    console.log(fields);
     let error = false;
     const keys = Object.keys(fields);
 
@@ -134,6 +136,7 @@ export default function BookForm({
               padding: 0,
             }}
           >
+            <Picker.Item label="Selecione um gênero" value="" />
             {genres.map((genre) => (
               <Picker.Item label={genre.name} value={genre.id} />
             ))}

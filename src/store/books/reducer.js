@@ -90,7 +90,7 @@ export default function reducer(state = INITIAL_STATE, action) {
     case Types.DELETE_BOOK_SUCCESS: {
       const { deletedBookId } = action.payload;
 
-      const newList = state.books.filter((book) => book.id === deletedBookId);
+      const newList = state.books.filter((book) => book.id !== deletedBookId);
 
       return {
         ...state,

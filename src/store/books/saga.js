@@ -1,16 +1,10 @@
-import { all, put, call } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import dayjs from 'dayjs';
 import firebase from '../../configs/firebase';
 
 import { Types as booksTypes } from './reducer';
 
 import { navigationRef } from '../../routes/NavigationRef';
-
-function* getGenre(genreId) {
-  const genreRef = firebase.db.collection('genres');
-  const genre = yield call(genreRef.doc(genreId).get);
-  return genre.data();
-}
 
 export function* getBooks() {
   try {
@@ -38,7 +32,6 @@ export function* getBooks() {
       });
     });
 
-    console.log({ books });
     yield put({
       type: booksTypes.GET_BOOKS_SUCCESS,
       payload: {
@@ -55,11 +48,30 @@ export function* getBooks() {
 
 export function* addBook({ payload }) {
   try {
-    console.log({ payload });
+    const res = yield firebase.db.collection('books').add({
+      ...payload,
+    });
+
+    const { genres } = yield select((state) => state.genres);
+    console.log(genres);
+
+    const selectedGenre = genres.find((g) => g.id === payload.genreId);
+
     yield put({
       type: booksTypes.ADD_BOOK_SUCCESS,
+      payload: {
+        book: {
+          ...payload,
+          id: res.id,
+          genre: {
+            ...selectedGenre,
+          },
+        },
+      },
     });
+    navigationRef.current.goBack();
   } catch (error) {
+    console.log(error);
     yield put({
       type: booksTypes.ADD_BOOK_ERROR,
     });
@@ -81,9 +93,13 @@ export function* updateBook({ payload }) {
 
 export function* deleteBook({ payload }) {
   try {
-    console.log({ payload });
+    yield firebase.db.collection('books').doc(payload.bookId).delete();
+
     yield put({
       type: booksTypes.DELETE_BOOK_SUCCESS,
+      payload: {
+        deletedBookId: payload.bookId,
+      },
     });
   } catch (error) {
     yield put({
