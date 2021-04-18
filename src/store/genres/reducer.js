@@ -115,7 +115,7 @@ export const getGenres = () => ({
 });
 
 export const addGenre = (values) => ({
-  type: Types.ADD_GENRE_SUCCESS,
+  type: Types.ADD_GENRE_ASYNC,
   payload: {
     ...values,
   },

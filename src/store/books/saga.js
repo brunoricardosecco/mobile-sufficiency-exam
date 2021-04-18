@@ -15,18 +15,26 @@ function* getGenre(genreId) {
 export function* getBooks() {
   try {
     const books = [];
+    const genres = [];
     const booksSnapshot = yield firebase.db.collectionGroup('books').get();
+    const genresSnapshot = yield firebase.db.collectionGroup('genres').get();
+
+    genresSnapshot.forEach((doc) => {
+      genres.push({
+        ...doc.data(),
+        id: doc.id,
+      });
+    });
 
     booksSnapshot.forEach((doc) => {
       const { genreId } = doc.data();
-      /* const genre = call(getGenre, genreId);
-        console.log({ genre }); */
+      const genre = genres.find((g) => g.id === genreId);
 
       books.push({
         ...doc.data(),
         id: doc.id,
         releaseDate: dayjs(doc.data().releaseDate).format('DD/MM/YYYY'),
-        /* genre: genre.exists ? genre.data().name : 'Erro ao carregar gênero', */
+        genre,
       });
     });
 

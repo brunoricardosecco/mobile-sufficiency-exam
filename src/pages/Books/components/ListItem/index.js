@@ -17,6 +17,7 @@ import { colors, metrics } from '../../../../constants';
 import styles from './styles';
 
 export default function ListItem({ item, navigation }) {
+  console.log(item);
   // * STATES
   const [isShowingResume, setIsShowingResume] = useState(false);
   const { isLoading } = useSelector((state) => state.books);
@@ -62,7 +63,7 @@ export default function ListItem({ item, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{`${item.name} - genero`}</Text>
+      <Text style={styles.title}>{`${item.name} - ${item.genre?.name}`}</Text>
 
       <Text style={styles.label}>{`R$${item.price.toFixed(2)}`}</Text>
 

@@ -1,10 +1,13 @@
 import React, { useState, useCallback } from 'react';
-import { Alert } from 'react-native';
+import { Alert, View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Picker } from '@react-native-picker/picker';
+import { useSelector } from 'react-redux';
 
 import Input from '../Input';
 import Button from '../Button';
 import { normalize } from '../../helpers';
+import { colors, metrics } from '../../constants';
 
 export default function BookForm({
   handleSubmit,
@@ -20,7 +23,9 @@ export default function BookForm({
     qtdPages: book.qtdPages?.toString() || '',
     releaseDate: book.releaseDate || '',
     resume: book.resume || '',
+    genreId: book.genreId || '',
   });
+  const { genres } = useSelector((state) => state.genres);
 
   // * FUNCTIONS
   const handleFillField = useCallback((name, value) => {
@@ -99,6 +104,43 @@ export default function BookForm({
         onChangeText={handleFillField}
         defaultValue={fields.resume}
       />
+      <View>
+        <Text
+          style={{
+            marginVertical: 5,
+            color: colors.white,
+          }}
+        >
+          Gênero do livro
+        </Text>
+        <View
+          style={{
+            borderRadius: metrics.radius,
+            borderColor: colors.primaryBlue,
+            borderWidth: 2,
+            color: colors.white,
+            padding: 0,
+          }}
+        >
+          <Picker
+            selectedValue={fields.genreId}
+            onValueChange={(value) => handleFillField('genreId', value)}
+            dropdownIconColor={colors.primaryBlue}
+            style={{
+              borderRadius: metrics.radius,
+              borderColor: colors.primaryBlue,
+              borderWidth: 2,
+              color: colors.white,
+              padding: 0,
+            }}
+          >
+            {genres.map((genre) => (
+              <Picker.Item label={genre.name} value={genre.id} />
+            ))}
+          </Picker>
+        </View>
+      </View>
+
       <Button
         text={mode === 'create' ? 'Adicionar' : 'Atualizar'}
         style={{ marginTop: normalize(10) }}

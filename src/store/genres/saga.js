@@ -35,10 +35,25 @@ export function* getGenres() {
 
 export function* addGenre({ payload }) {
   try {
-    console.log({ payload });
+    console.log('CHEGEEEEEU');
+    const res = yield firebase.db.collection('genres').add({
+      ...payload,
+    });
+
+    console.log({
+      id: res.id,
+    });
+
     yield put({
       type: genresTypes.ADD_GENRE_SUCCESS,
+      payload: {
+        genre: {
+          name: payload.name,
+          id: res.id,
+        },
+      },
     });
+    navigationRef.current.goBack();
   } catch (error) {
     yield put({
       type: genresTypes.ADD_GENRE_ERROR,

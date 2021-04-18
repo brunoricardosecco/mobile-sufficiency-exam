@@ -11,7 +11,7 @@ export const Types = {
 };
 
 const INITIAL_STATE = {
-  isLogged: false,
+  isLogged: true,
   isLoading: false,
 };
 
