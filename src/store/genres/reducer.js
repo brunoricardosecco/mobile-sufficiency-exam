@@ -91,7 +91,7 @@ export default function reducer(state = INITIAL_STATE, action) {
       const { deletedGenreId } = action.payload;
 
       const newList = state.genres.filter(
-        (genre) => genre.id === deletedGenreId
+        (genre) => genre.id !== deletedGenreId
       );
 
       return {

@@ -16,8 +16,8 @@ export function* getBooks() {
   try {
     const books = [];
     const genres = [];
-    const booksSnapshot = yield firebase.db.collectionGroup('books').get();
-    const genresSnapshot = yield firebase.db.collectionGroup('genres').get();
+    const booksSnapshot = yield firebase.db.collection('books').get();
+    const genresSnapshot = yield firebase.db.collection('genres').get();
 
     genresSnapshot.forEach((doc) => {
       genres.push({

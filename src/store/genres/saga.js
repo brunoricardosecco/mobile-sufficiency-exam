@@ -56,7 +56,7 @@ export function* addGenre({ payload }) {
 
 export function* updateGenre({ payload }) {
   try {
-    const res = yield firebase.db.collection('genres').doc(payload.id).update({
+    yield firebase.db.collection('genres').doc(payload.id).update({
       name: payload.name,
     });
 
@@ -76,9 +76,23 @@ export function* updateGenre({ payload }) {
 
 export function* deleteGenre({ payload }) {
   try {
-    console.log({ payload });
+    const booksSnapshot = yield firebase.db
+      .collection('books')
+      .where('genreId', '==', payload.genreId)
+      .get();
+
+    if (!booksSnapshot.empty) {
+      payload.cantDeleteItem();
+      throw 'ERROR';
+    }
+
+    yield firebase.db.collection('genres').doc(payload.genreId).delete();
+
     yield put({
       type: genresTypes.DELETE_GENRE_SUCCESS,
+      payload: {
+        deletedGenreId: payload.genreId,
+      },
     });
   } catch (error) {
     yield put({

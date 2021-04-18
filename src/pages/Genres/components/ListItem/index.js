@@ -20,6 +20,19 @@ export default function ListItem({ item, navigation }) {
     [dispatch]
   );
 
+  const cantDeleteItem = () => {
+    Alert.alert(
+      'Não é possível',
+      'Você não pode deletar esse item pois esta relacionado com um livro.',
+      [
+        {
+          text: 'Ok',
+          style: 'cancel',
+        },
+      ]
+    );
+  };
+
   const handleDeleteGenre = (genreId) => {
     Alert.alert(
       'Confirmação',
@@ -32,7 +45,7 @@ export default function ListItem({ item, navigation }) {
         {
           text: 'Sim',
           style: 'default',
-          onPress: () => deleteGenreAsync(genreId),
+          onPress: () => deleteGenreAsync({ genreId, cantDeleteItem }),
         },
       ]
     );
