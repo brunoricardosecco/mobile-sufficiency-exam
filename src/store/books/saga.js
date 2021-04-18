@@ -90,7 +90,9 @@ export function* updateBook({ payload }) {
         updatedBook: payload,
       },
     });
+    navigationRef.current.goBack();
   } catch (error) {
+    console.log(error);
     yield put({
       type: booksTypes.UPDATE_BOOK_ERROR,
     });

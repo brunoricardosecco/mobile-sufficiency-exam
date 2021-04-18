@@ -64,8 +64,12 @@ export default function reducer(state = INITIAL_STATE, action) {
       const { updatedBook } = action.payload;
 
       const newList = state.books.map((book) => {
-        if (book.id === updatedBook) {
-          return updatedBook;
+        if (book.id === updatedBook.id) {
+          return {
+            ...updatedBook,
+            genre: book.genre,
+            genreId: book.genreId,
+          };
         }
 
         return book;
