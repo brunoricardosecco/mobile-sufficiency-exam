@@ -1,14 +1,22 @@
 import { put } from 'redux-saga/effects';
-
+import firebase from '../../configs/firebase';
 import { Types as authTypes } from './reducer';
 
 export function* signIn({ payload }) {
+  /* const bookRef = yield firebase.db
+    .collection('books')
+    .doc('MswAkIMU31P3LIR6rxTe')
+    .collection('genres')
+    .doc()
+    .set({
+      name: 'genreTest',
+    }); */
   try {
-    console.log({ payload });
     yield put({
       type: authTypes.SIGN_IN_SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     yield put({
       type: authTypes.SIGN_IN_ERROR,
     });
