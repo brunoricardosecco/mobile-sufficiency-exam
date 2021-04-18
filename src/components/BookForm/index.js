@@ -10,14 +10,14 @@ export default function BookForm({
   handleSubmit,
   isLoading,
   mode = 'create',
-  book,
+  book = {},
 }) {
   //* STATES
   const [fields, setFields] = useState({
     name: book.name || '',
     authorsName: book.authorsName || '',
-    price: book.price.toString() || '',
-    qtdPages: book.qtdPages.toString() || '',
+    price: book.price?.toString() || '',
+    qtdPages: book.qtdPages?.toString() || '',
     releaseDate: book.releaseDate || '',
     resume: book.resume || '',
   });

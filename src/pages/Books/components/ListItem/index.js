@@ -1,21 +1,55 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { View, Text, LayoutAnimation, UIManager, Platform } from 'react-native';
-import dayjs from 'dayjs';
+import {
+  View,
+  Text,
+  LayoutAnimation,
+  UIManager,
+  Platform,
+  Alert,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { deleteBook } from '../../../../store/books/reducer';
 
 import Button from '../../../../components/Button';
-import styles from './styles';
 import { normalize } from '../../../../helpers';
 import { colors, metrics } from '../../../../constants';
+import styles from './styles';
 
 export default function ListItem({ item, navigation }) {
   // * STATES
   const [isShowingResume, setIsShowingResume] = useState(false);
+  const { isLoading } = useSelector((state) => state.books);
+
+  // * ACTIONS
+  const dispatch = useDispatch();
+  const deleteBookAsync = useCallback((value) => dispatch(deleteBook(value)), [
+    dispatch,
+  ]);
 
   // * FUNCTIONS
   const handleToggleResume = useCallback(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setIsShowingResume((prevState) => !prevState);
   }, []);
+
+  const handleDeleteBook = (bookId) => {
+    Alert.alert(
+      'Confirmação',
+      'Você tem certeza que deseja excluir esse item?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Sim',
+          style: 'default',
+          onPress: () => deleteBookAsync(bookId),
+        },
+      ]
+    );
+  };
 
   useEffect(() => {
     if (
@@ -59,8 +93,9 @@ export default function ListItem({ item, navigation }) {
       >
         <Button
           text="Excluir"
-          onPress={handleToggleResume}
+          onPress={() => handleDeleteBook(item.id)}
           style={{ width: '49%', backgroundColor: colors.red }}
+          isLoading={isLoading}
         />
         <Button
           text="Editar"

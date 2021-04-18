@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { navigationRef } from './NavigationRef';
+
 import BottomTabMenu from './BottomTabMenu';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
@@ -14,7 +16,7 @@ export default function Routes() {
   const { isLogged } = useSelector((state) => state.auth);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       {isLogged ? (
         <BottomTabMenu />
       ) : (

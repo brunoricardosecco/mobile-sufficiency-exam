@@ -1,4 +1,8 @@
 export const Types = {
+  GET_BOOKS_ASYNC: 'books/GET_BOOKS_ASYNC',
+  GET_BOOKS_SUCCESS: 'books/GET_BOOKS_SUCCESS',
+  GET_BOOKS_ERROR: 'books/GET_BOOKS_ERROR',
+
   ADD_BOOK_ASYNC: 'books/ADD_BOOK_ASYNC',
   ADD_BOOK_SUCCESS: 'books/ADD_BOOK_SUCCESS',
   ADD_BOOK_ERROR: 'books/ADD_BOOK_ERROR',
@@ -19,6 +23,22 @@ const INITIAL_STATE = {
 
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case Types.GET_BOOKS_ASYNC:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case Types.GET_BOOKS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        books: action.payload.books,
+      };
+    case Types.GET_BOOKS_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case Types.ADD_BOOK_ASYNC:
       return {
         ...state,
@@ -87,6 +107,10 @@ export default function reducer(state = INITIAL_STATE, action) {
       return state;
   }
 }
+
+export const getBooks = () => ({
+  type: Types.GET_BOOKS_ASYNC,
+});
 
 export const addBook = (values) => ({
   type: Types.ADD_BOOK_ASYNC,

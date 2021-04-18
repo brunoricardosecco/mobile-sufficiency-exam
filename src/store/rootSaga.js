@@ -15,6 +15,7 @@ function* watchAsyncBooks() {
   yield takeLatest(booksTypes.ADD_BOOK_ASYNC, books.addBook);
   yield takeLatest(booksTypes.UPDATE_BOOK_ASYNC, books.updateBook);
   yield takeLatest(booksTypes.DELETE_BOOK_ASYNC, books.deleteBook);
+  yield takeLatest(booksTypes.GET_BOOKS_ASYNC, books.getBooks);
 }
 
 export default function* rootSaga() {
