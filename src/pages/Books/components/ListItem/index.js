@@ -4,8 +4,10 @@ import dayjs from 'dayjs';
 
 import Button from '../../../../components/Button';
 import styles from './styles';
+import { normalize } from '../../../../helpers';
+import { colors, metrics } from '../../../../constants';
 
-export default function ListItem({ item }) {
+export default function ListItem({ item, navigation }) {
   // * STATES
   const [isShowingResume, setIsShowingResume] = useState(false);
 
@@ -35,10 +37,7 @@ export default function ListItem({ item }) {
       </Text>
 
       <Text style={styles.label}>
-        Data de lançamento:{' '}
-        <Text style={styles.value}>
-          {dayjs(item.releaseDate).format('DD/MM/YYYY')}
-        </Text>
+        Data de lançamento: <Text style={styles.value}>{item.releaseDate}</Text>
       </Text>
 
       {isShowingResume && (
@@ -51,6 +50,25 @@ export default function ListItem({ item }) {
         text={isShowingResume ? 'Ocultar resumo' : 'Mostrar resumo'}
         onPress={handleToggleResume}
       />
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginTop: normalize(metrics.spacing / 2),
+        }}
+      >
+        <Button
+          text="Excluir"
+          onPress={handleToggleResume}
+          style={{ width: '49%', backgroundColor: colors.red }}
+        />
+        <Button
+          text="Editar"
+          onPress={() => navigation.navigate('EditBook', { book: item })}
+          style={{ width: '49%', backgroundColor: colors.yellow }}
+          textStyle={{ color: colors.black }}
+        />
+      </View>
     </View>
   );
 }

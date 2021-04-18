@@ -13,6 +13,8 @@ function* watchAsyncAuth() {
 
 function* watchAsyncBooks() {
   yield takeLatest(booksTypes.ADD_BOOK_ASYNC, books.addBook);
+  yield takeLatest(booksTypes.UPDATE_BOOK_ASYNC, books.updateBook);
+  yield takeLatest(booksTypes.DELETE_BOOK_ASYNC, books.deleteBook);
 }
 
 export default function* rootSaga() {

@@ -6,15 +6,20 @@ import Input from '../Input';
 import Button from '../Button';
 import { normalize } from '../../helpers';
 
-export default function BookForm({ handleSubmit, isLoading, mode = 'create' }) {
+export default function BookForm({
+  handleSubmit,
+  isLoading,
+  mode = 'create',
+  book,
+}) {
   //* STATES
   const [fields, setFields] = useState({
-    name: '',
-    authorsName: '',
-    price: '',
-    qtdPages: '',
-    releaseDate: '',
-    resume: '',
+    name: book.name || '',
+    authorsName: book.authorsName || '',
+    price: book.price.toString() || '',
+    qtdPages: book.qtdPages.toString() || '',
+    releaseDate: book.releaseDate || '',
+    resume: book.resume || '',
   });
 
   // * FUNCTIONS
@@ -58,35 +63,41 @@ export default function BookForm({ handleSubmit, isLoading, mode = 'create' }) {
         label="Nome"
         autoCapitalize="words"
         onChangeText={handleFillField}
+        defaultValue={fields.name}
       />
       <Input
         name="authorsName"
         label="Nome do autor"
         autoCapitalize="words"
         onChangeText={handleFillField}
+        defaultValue={fields.authorsName}
       />
       <Input
         name="price"
         label="Preço"
         keyboardType="numeric"
         onChangeText={handleFillField}
+        defaultValue={fields.price}
       />
       <Input
         name="qtdPages"
         label="Quantidade de páginas"
         keyboardType="number-pad"
         onChangeText={handleFillField}
+        defaultValue={fields.qtdPages}
       />
       <Input
         name="releaseDate"
         label="Data de lançamento"
         keyboardType="number-pad"
         onChangeText={handleFillField}
+        defaultValue={fields.releaseDate}
       />
       <Input
         name="resume"
         label="Resumo do livro"
         onChangeText={handleFillField}
+        defaultValue={fields.resume}
       />
       <Button
         text={mode === 'create' ? 'Adicionar' : 'Atualizar'}

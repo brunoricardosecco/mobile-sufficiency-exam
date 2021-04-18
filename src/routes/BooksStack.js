@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Books from '../pages/Books';
 import AddBook from '../pages/AddBook';
+import EditBook from '../pages/EditBook';
 import colors from '../constants/colors';
 
 export default function BooksStack() {
@@ -31,6 +32,11 @@ export default function BooksStack() {
         name="AddBook"
         component={AddBook}
         options={{ title: 'Adicionar livro' }}
+      />
+      <Stack.Screen
+        name="EditBook"
+        component={EditBook}
+        options={{ title: 'Editar livro' }}
       />
     </Stack.Navigator>
   );
