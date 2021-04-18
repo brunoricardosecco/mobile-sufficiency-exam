@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getGenres } from '../../store/genres/reducer';
 
 import Button from '../../components/Button';
-import ListItem from './components/ListItem';
+import ListItem from '../../components/GenreListItem';
 import styles from './styles';
 
 export default function Genres({ navigation }) {

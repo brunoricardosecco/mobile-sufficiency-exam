@@ -1,21 +1,20 @@
 import { put } from 'redux-saga/effects';
+
 import firebase from '../../configs/firebase';
 import { Types as authTypes } from './reducer';
+import { navigationRef } from '../../routes/NavigationRef';
 
 export function* signIn({ payload }) {
-  /* const bookRef = yield firebase.db
-    .collection('books')
-    .doc('MswAkIMU31P3LIR6rxTe')
-    .collection('genres')
-    .doc()
-    .set({
-      name: 'genreTest',
-    }); */
   try {
+    yield firebase.auth.signInWithEmailAndPassword(
+      payload.email,
+      payload.password
+    );
     yield put({
       type: authTypes.SIGN_IN_SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     yield put({
       type: authTypes.SIGN_IN_ERROR,
     });
@@ -24,9 +23,14 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
+    yield firebase.auth.createUserWithEmailAndPassword(
+      payload.email,
+      payload.password
+    );
     yield put({
       type: authTypes.SIGN_UP_SUCCESS,
     });
+    navigationRef.current.goBack();
   } catch (error) {
     yield put({
       type: authTypes.SIGN_UP_ERROR,

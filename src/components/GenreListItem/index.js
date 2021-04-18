@@ -2,11 +2,11 @@ import React, { useCallback } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteGenre } from '../../../../store/genres/reducer';
+import { deleteGenre } from '../../store/genres/reducer';
 
-import Button from '../../../../components/Button';
-import { normalize } from '../../../../helpers';
-import { colors, metrics } from '../../../../constants';
+import Button from '../Button';
+import { normalize } from '../../helpers';
+import { colors, metrics } from '../../constants';
 import styles from './styles';
 
 export default function ListItem({ item, navigation }) {

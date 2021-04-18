@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBooks } from '../../store/books/reducer';
 
 import Button from '../../components/Button';
-import ListItem from './components/ListItem';
+import ListItem from '../../components/BookListItem';
 import styles from './styles';
 
 export default function Books({ navigation }) {

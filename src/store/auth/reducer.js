@@ -11,7 +11,7 @@ export const Types = {
 };
 
 const INITIAL_STATE = {
-  isLogged: true,
+  isLogged: false,
   isLoading: false,
 };
 
@@ -42,7 +42,6 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         isLoading: false,
-        isLogged: true,
       };
     case Types.SIGN_UP_ERROR:
       return {

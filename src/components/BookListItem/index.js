@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteBook } from '../../../../store/books/reducer';
+import { deleteBook } from '../../store/books/reducer';
 
-import Button from '../../../../components/Button';
-import { normalize } from '../../../../helpers';
-import { colors, metrics } from '../../../../constants';
+import Button from '../Button';
+import { normalize } from '../../helpers';
+import { colors, metrics } from '../../constants';
 import styles from './styles';
 
 export default function ListItem({ item, navigation }) {
