@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 
-import { addBook } from '../../store/books/reducer';
+import { updateBook } from '../../store/books/reducer';
 
 import BookForm from '../../components/BookForm';
 import styles from './styles';
@@ -15,20 +15,20 @@ export default function EditBook() {
   const {
     params: { book },
   } = route;
-  console.log(book);
 
   // * ACTIONS
   const dispatch = useDispatch();
-  const addBookAsync = useCallback((values) => dispatch(addBook(values)), [
-    dispatch,
-  ]);
+  const updateBookAsync = useCallback(
+    (values) => dispatch(updateBook(values)),
+    [dispatch]
+  );
 
   // * FUNCTIONS
   const handleSubmit = useCallback(
     (values) => {
-      addBookAsync(values);
+      updateBookAsync({ ...values, id: book.id });
     },
-    [addBookAsync]
+    [book.id, updateBookAsync]
   );
 
   return (

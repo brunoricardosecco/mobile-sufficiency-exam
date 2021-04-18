@@ -16,7 +16,6 @@ export function* signIn({ payload }) {
       type: authTypes.SIGN_IN_SUCCESS,
     });
   } catch (error) {
-    console.log(error);
     yield put({
       type: authTypes.SIGN_IN_ERROR,
     });
@@ -25,7 +24,6 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    console.log({ payload });
     yield put({
       type: authTypes.SIGN_UP_SUCCESS,
     });

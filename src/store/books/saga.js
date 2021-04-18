@@ -39,7 +39,6 @@ export function* getBooks() {
       },
     });
   } catch (error) {
-    console.log(error);
     yield put({
       type: booksTypes.GET_BOOKS_ERROR,
     });
@@ -53,7 +52,6 @@ export function* addBook({ payload }) {
     });
 
     const { genres } = yield select((state) => state.genres);
-    console.log(genres);
 
     const selectedGenre = genres.find((g) => g.id === payload.genreId);
 
@@ -71,7 +69,6 @@ export function* addBook({ payload }) {
     });
     navigationRef.current.goBack();
   } catch (error) {
-    console.log(error);
     yield put({
       type: booksTypes.ADD_BOOK_ERROR,
     });
@@ -80,9 +77,18 @@ export function* addBook({ payload }) {
 
 export function* updateBook({ payload }) {
   try {
-    console.log({ payload });
+    const { id, ...rest } = payload;
+    yield firebase.db
+      .collection('books')
+      .doc(id)
+      .update({
+        ...rest,
+      });
     yield put({
       type: booksTypes.UPDATE_BOOK_SUCCESS,
+      payload: {
+        updatedBook: payload,
+      },
     });
   } catch (error) {
     yield put({
