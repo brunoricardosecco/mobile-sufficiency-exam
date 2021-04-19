@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Text, View, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { signUp } from '../../store/auth/reducer';
 
@@ -19,6 +20,9 @@ export default function SignUp({ navigation }) {
     confirmPassword: '',
   });
   const { isLoading } = useSelector((states) => states.auth);
+
+  // * HOOKS
+  const { t } = useTranslation();
 
   // * ACTIONS
   const dispatch = useDispatch();
@@ -40,25 +44,21 @@ export default function SignUp({ navigation }) {
       fields.password === '' ||
       fields.confirmPassword === ''
     ) {
-      Alert.alert(
-        'Campo vazio',
-        'Por favor, preencha todos os campos para entrar no aplicativo',
-        [
-          {
-            text: 'Beleza',
-          },
-        ]
-      );
+      Alert.alert(t('signUp.alert.title'), t('signUp.alert.message'), [
+        {
+          text: t('signUp.alert.confirmButton'),
+        },
+      ]);
       return;
     }
 
     if (fields.password !== fields.confirmPassword) {
       Alert.alert(
-        'Campo diferentes',
-        'A confirmação de senha deve ser igual a senha',
+        t('signUp.alertDifferentPasswords.title'),
+        t('signUp.alertDifferentPasswords.message'),
         [
           {
-            text: 'Beleza',
+            text: t('signUp.alertDifferentPasswords.confirmButton'),
           },
         ]
       );
@@ -82,30 +82,30 @@ export default function SignUp({ navigation }) {
           <Text style={styles.title}>LibApp</Text>
           <Input
             name="email"
-            label="E-mail"
+            label={t('signUp.emailLabel')}
             autoCapitalize="none"
             onChangeText={handleFillField}
           />
           <Input
             name="password"
-            label="Senha"
+            label={t('signUp.passwordLabel')}
             secureTextEntry
             onChangeText={handleFillField}
           />
           <Input
             name="confirmPassword"
-            label="Confirme a senha"
+            label={t('signUp.confirmPasswordLabel')}
             secureTextEntry
             onChangeText={handleFillField}
           />
           <Button
-            text="Pronto"
+            text={t('signUp.submitButton')}
             style={{ marginTop: normalize(10) }}
             onPress={handleSubmit}
             isLoading={isLoading}
           />
           <Button
-            text="Não quero me cadastrar"
+            text={t('signUp.cancelButton')}
             clear
             style={{ marginTop: normalize(10) }}
             onPress={() => navigation.goBack()}

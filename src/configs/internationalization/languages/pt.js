@@ -1,11 +1,11 @@
 export default {
   translation: {
     signIn: {
-      submitButton: 'Bora',
       emailLabel: 'E-mail',
       passwordLabel: 'Senha',
+      submitButton: 'Bora',
       signUpButton: 'Preciso me cadastrar',
-      title: 'Cadastro',
+      title: 'Login',
       alert: {
         title: 'Campo vazio',
         message:
@@ -18,8 +18,19 @@ export default {
       emailLabel: 'E-mail',
       passwordLabel: 'Senha',
       confirmPasswordLabel: 'Confirme a senha',
-      signUpButton: 'Não quero me cadastrar',
+      cancelButton: 'Não quero me cadastrar',
       title: 'Cadastro',
+      alert: {
+        title: 'Campo vazio',
+        message:
+          'Por favor, preencha todos os campos para entrar no aplicativo.',
+        confirmButton: 'Beleza',
+      },
+      alertDifferentPasswords: {
+        title: 'Campo diferentes',
+        message: 'A confirmação de senha deve ser igual a senha.',
+        confirmButton: 'Beleza',
+      },
     },
     books: {
       title: 'Livros',
@@ -27,7 +38,7 @@ export default {
 
       item: {
         qtdPages: 'Quantidade de páginas:',
-        releaseDate: 'Data de lançamento',
+        releaseDate: 'Data de lançamento:',
         resume: 'Resumo',
         showResumeButton: 'Mostrar resumo',
         hideResumeButton: 'Ocultar resumo',
@@ -41,17 +52,26 @@ export default {
         },
       },
     },
-    addBook: {
+    bookForm: {
       nameLabel: 'Nome',
       authorsNameLabel: 'Nome do autor',
       priceLabel: 'Preço',
       qtdPagesLabel: 'Quantidade de páginas',
       releaseDateLabel: 'Data de lançamento',
       resumeLabel: 'Resumo do livro',
-      booksGenreLabel: 'Gênero do livro',
+      bookGenreLabel: 'Gênero do livro',
       defaultGenreSelector: 'Selecione um gênero',
-      submitButton: 'Adicionar',
+      createButton: 'Adicionar',
+      editButton: 'Atualizar',
+      alert: {
+        title: 'Campo vazio',
+        message:
+          'Por favor, preencha todos os campos para entrar no aplicativo.',
+        confirmButton: 'Beleza',
+      },
     },
+    addBook: 'Adicionar livro',
+    editBook: 'Editar livro',
     genres: {
       title: 'Gêneros',
       addGenreButton: 'Adicione um novo gênero',
@@ -72,9 +92,19 @@ export default {
         },
       },
     },
-    addGenre: {
+    genreForm: {
       nameLabel: 'Nome',
-      submitButton: 'Adicionar',
+      createButton: 'Adicionar',
+      editButton: 'Atualizar',
+      alert: {
+        title: 'Campo vazio',
+        message:
+          'Por favor, preencha todos os campos para entrar no aplicativo.',
+        confirmButton: 'Beleza',
+      },
     },
+    addGenre: 'Adicionar gênero',
+    editGenre: 'Editar gênero',
+    logout: 'Sair',
   },
 };

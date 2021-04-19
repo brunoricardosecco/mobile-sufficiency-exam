@@ -39,15 +39,11 @@ export default function SignIn({ navigation }) {
 
   const handleSubmit = useCallback(() => {
     if (fields.email === '' || fields.password === '') {
-      Alert.alert(
-        'Campo vazio',
-        'Por favor, preencha todos os campos para entrar no aplicativo.',
-        [
-          {
-            text: 'Beleza',
-          },
-        ]
-      );
+      Alert.alert(t('signIn.alert.title'), t('signIn.alert.message'), [
+        {
+          text: t('signIn.alert.confirmButton'),
+        },
+      ]);
       return;
     }
 
@@ -74,18 +70,18 @@ export default function SignIn({ navigation }) {
           />
           <Input
             name="password"
-            label="Senha"
+            label={t('signIn.passwordLabel')}
             secureTextEntry
             onChangeText={handleFillField}
           />
           <Button
-            text="Bora"
+            text={t('signIn.submitButton')}
             style={{ marginTop: normalize(10) }}
             onPress={handleSubmit}
             isLoading={isLoading}
           />
           <Button
-            text="Preciso me cadastrar"
+            text={t('signIn.signUpButton')}
             clear
             style={{ marginTop: normalize(10) }}
             onPress={() => navigation.navigate('SignUp')}

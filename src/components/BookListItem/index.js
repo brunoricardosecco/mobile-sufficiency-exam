@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { deleteBook } from '../../store/books/reducer';
 
@@ -20,6 +21,9 @@ export default function ListItem({ item, navigation }) {
   // * STATES
   const [isShowingResume, setIsShowingResume] = useState(false);
   const { isLoading } = useSelector((state) => state.books);
+
+  // * HOOKS
+  const { t } = useTranslation();
 
   // * ACTIONS
   const dispatch = useDispatch();
@@ -35,15 +39,15 @@ export default function ListItem({ item, navigation }) {
 
   const handleDeleteBook = (bookId) => {
     Alert.alert(
-      'Confirmação',
-      'Você tem certeza que deseja excluir esse item?',
+      t('books.item.confirmDelete.title'),
+      t('books.item.confirmDelete.message'),
       [
         {
-          text: 'Cancelar',
+          text: t('books.item.confirmDelete.cancelButton'),
           style: 'cancel',
         },
         {
-          text: 'Sim',
+          text: t('books.item.confirmDelete.confirmButton'),
           style: 'default',
           onPress: () => deleteBookAsync({ bookId }),
         },
@@ -67,21 +71,27 @@ export default function ListItem({ item, navigation }) {
       <Text style={styles.label}>{`R$${item.price}`}</Text>
 
       <Text style={styles.label}>
-        Quantidade de páginas: <Text style={styles.value}>{item.qtdPages}</Text>
+        {t('books.item.qtdPages')}{' '}
+        <Text style={styles.value}>{item.qtdPages}</Text>
       </Text>
 
       <Text style={styles.label}>
-        Data de lançamento: <Text style={styles.value}>{item.releaseDate}</Text>
+        {t('books.item.releaseDate')}{' '}
+        <Text style={styles.value}>{item.releaseDate}</Text>
       </Text>
 
       {isShowingResume && (
         <View>
-          <Text style={styles.label}>Resumo</Text>
+          <Text style={styles.label}>{t('books.item.resume')}</Text>
           <Text style={styles.value}>{item.resume}</Text>
         </View>
       )}
       <Button
-        text={isShowingResume ? 'Ocultar resumo' : 'Mostrar resumo'}
+        text={
+          isShowingResume
+            ? t('books.item.hideResumeButton')
+            : t('books.item.showResumeButton')
+        }
         onPress={handleToggleResume}
       />
       <View
@@ -92,13 +102,13 @@ export default function ListItem({ item, navigation }) {
         }}
       >
         <Button
-          text="Excluir"
+          text={t('books.item.deleteButton')}
           onPress={() => handleDeleteBook(item.id)}
           style={{ width: '49%', backgroundColor: colors.red }}
           isLoading={isLoading}
         />
         <Button
-          text="Editar"
+          text={t('books.item.editButton')}
           onPress={() => navigation.navigate('EditBook', { book: item })}
           style={{ width: '49%', backgroundColor: colors.yellow }}
           textStyle={{ color: colors.black }}

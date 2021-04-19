@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { deleteGenre } from '../../store/genres/reducer';
 
@@ -13,6 +14,9 @@ export default function ListItem({ item, navigation }) {
   // * STATES
   const { isLoading } = useSelector((state) => state.genres);
 
+  // * HOOKS
+  const { t } = useTranslation();
+
   // * ACTIONS
   const dispatch = useDispatch();
   const deleteGenreAsync = useCallback(
@@ -22,12 +26,12 @@ export default function ListItem({ item, navigation }) {
 
   const cantDeleteItem = () => {
     Alert.alert(
-      'Não é possível',
-      'Você não pode deletar esse item pois esta relacionado com um livro.',
+      t('genres.item.cantDelete.title'),
+      t('genres.item.cantDelete.message'),
       [
         {
-          text: 'Ok',
-          style: 'cancel',
+          text: t('genres.item.cantDelete.confirmButton'),
+          style: 'default',
         },
       ]
     );
@@ -35,15 +39,15 @@ export default function ListItem({ item, navigation }) {
 
   const handleDeleteGenre = (genreId) => {
     Alert.alert(
-      'Confirmação',
-      'Você tem certeza que deseja excluir esse item?',
+      t('genres.item.confirmDelete.title'),
+      t('genres.item.confirmDelete.message'),
       [
         {
-          text: 'Cancelar',
+          text: t('genres.item.confirmDelete.cancelButton'),
           style: 'cancel',
         },
         {
-          text: 'Sim',
+          text: t('genres.item.confirmDelete.confirmButton'),
           style: 'default',
           onPress: () => deleteGenreAsync({ genreId, cantDeleteItem }),
         },
@@ -62,13 +66,13 @@ export default function ListItem({ item, navigation }) {
         }}
       >
         <Button
-          text="Excluir"
+          text={t('genres.item.deleteButton')}
           onPress={() => handleDeleteGenre(item.id)}
           style={{ width: '49%', backgroundColor: colors.red }}
           isLoading={isLoading}
         />
         <Button
-          text="Editar"
+          text={t('genres.item.editButton')}
           onPress={() => navigation.navigate('EditGenre', { genre: item })}
           style={{ width: '49%', backgroundColor: colors.yellow }}
           textStyle={{ color: colors.black }}

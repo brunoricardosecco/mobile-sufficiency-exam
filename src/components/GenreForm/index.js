@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useTranslation } from 'react-i18next';
 
 import Input from '../Input';
 import Button from '../Button';
@@ -16,6 +17,9 @@ export default function GenreForm({
   const [fields, setFields] = useState({
     name: genre.name || '',
   });
+
+  // * HOOKS
+  const { t } = useTranslation();
 
   // * FUNCTIONS
   const handleFillField = useCallback((name, value) => {
@@ -36,15 +40,11 @@ export default function GenreForm({
     });
 
     if (error) {
-      Alert.alert(
-        'Campo vazio',
-        'Por favor, preencha todos os campos para entrar no aplicativo.',
-        [
-          {
-            text: 'Beleza',
-          },
-        ]
-      );
+      Alert.alert(t('genreForm.alert.title'), t('genreForm.alert.message'), [
+        {
+          text: t('genreForm.alert.confirmButton'),
+        },
+      ]);
       return;
     }
 
@@ -55,13 +55,17 @@ export default function GenreForm({
     <KeyboardAwareScrollView enableOnAndroid>
       <Input
         name="name"
-        label="Nome"
+        label={t('genreForm.nameLabel')}
         autoCapitalize="words"
         onChangeText={handleFillField}
         defaultValue={fields.name}
       />
       <Button
-        text={mode === 'create' ? 'Adicionar' : 'Atualizar'}
+        text={
+          mode === 'create'
+            ? t('genreForm.createButton')
+            : t('genreForm.editButton')
+        }
         style={{ marginTop: normalize(10) }}
         onPress={onSubmit}
         isLoading={isLoading}

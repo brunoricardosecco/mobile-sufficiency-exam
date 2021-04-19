@@ -2,12 +2,11 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useTranslation } from 'react-i18next';
 
-import Books from '../pages/Books';
-import AddBook from '../pages/AddBook';
-import EditBook from '../pages/EditBook';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
 import colors from '../constants/colors';
 
-export default function BooksStack() {
+export default function AuthStack() {
   const Stack = createStackNavigator();
 
   // * HOOKS
@@ -25,22 +24,17 @@ export default function BooksStack() {
           alignSelf: 'center',
         },
       }}
-      initialRouteName="Books"
+      initialRouteName="SignIn"
     >
       <Stack.Screen
-        name="Books"
-        component={Books}
-        options={{ title: t('books.title') }}
+        name="SignIn"
+        component={SignIn}
+        options={{ title: t('signIn.title') }}
       />
       <Stack.Screen
-        name="AddBook"
-        component={AddBook}
-        options={{ title: t('addBook') }}
-      />
-      <Stack.Screen
-        name="EditBook"
-        component={EditBook}
-        options={{ title: t('editBook') }}
+        name="SignUp"
+        component={SignUp}
+        options={{ title: t('signUp.title') }}
       />
     </Stack.Navigator>
   );

@@ -3,6 +3,7 @@ import { Alert, View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Picker } from '@react-native-picker/picker';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Input from '../Input';
 import Button from '../Button';
@@ -27,6 +28,9 @@ export default function BookForm({
   });
   const { genres } = useSelector((state) => state.genres);
 
+  // * HOOKS
+  const { t } = useTranslation();
+
   // * FUNCTIONS
   const handleFillField = useCallback((name, value) => {
     setFields((prevState) => ({
@@ -46,15 +50,11 @@ export default function BookForm({
     });
 
     if (error) {
-      Alert.alert(
-        'Campo vazio',
-        'Por favor, preencha todos os campos para entrar no aplicativo.',
-        [
-          {
-            text: 'Beleza',
-          },
-        ]
-      );
+      Alert.alert(t('bookForm.alert.title'), t('bookForm.alert.message'), [
+        {
+          text: t('bookForm.alert.confirmButton'),
+        },
+      ]);
       return;
     }
 
@@ -65,42 +65,42 @@ export default function BookForm({
     <KeyboardAwareScrollView enableOnAndroid>
       <Input
         name="name"
-        label="Nome"
+        label={t('bookForm.nameLabel')}
         autoCapitalize="words"
         onChangeText={handleFillField}
         defaultValue={fields.name}
       />
       <Input
         name="authorsName"
-        label="Nome do autor"
+        label={t('bookForm.authorsNameLabel')}
         autoCapitalize="words"
         onChangeText={handleFillField}
         defaultValue={fields.authorsName}
       />
       <Input
         name="price"
-        label="Preço"
+        label={t('bookForm.priceLabel')}
         keyboardType="numeric"
         onChangeText={handleFillField}
         defaultValue={fields.price}
       />
       <Input
         name="qtdPages"
-        label="Quantidade de páginas"
+        label={t('bookForm.qtdPagesLabel')}
         keyboardType="number-pad"
         onChangeText={handleFillField}
         defaultValue={fields.qtdPages}
       />
       <Input
         name="releaseDate"
-        label="Data de lançamento"
+        label={t('bookForm.releaseDateLabel')}
         keyboardType="number-pad"
         onChangeText={handleFillField}
         defaultValue={fields.releaseDate}
       />
       <Input
         name="resume"
-        label="Resumo do livro"
+        label={t('bookForm.resumeLabel')}
         onChangeText={handleFillField}
         defaultValue={fields.resume}
       />
@@ -111,7 +111,7 @@ export default function BookForm({
             color: colors.white,
           }}
         >
-          Gênero do livro
+          {t('bookForm.bookGenreLabel')}
         </Text>
         <View
           style={{
@@ -134,7 +134,7 @@ export default function BookForm({
               padding: 0,
             }}
           >
-            <Picker.Item label="Selecione um gênero" value="" />
+            <Picker.Item label={t('bookForm.defaultGenreSelector')} value="" />
             {genres.map((genre) => (
               <Picker.Item key={genre.id} label={genre.name} value={genre.id} />
             ))}
@@ -143,7 +143,11 @@ export default function BookForm({
       </View>
 
       <Button
-        text={mode === 'create' ? 'Adicionar' : 'Atualizar'}
+        text={
+          mode === 'create'
+            ? t('bookForm.createButton')
+            : t('bookForm.editButton')
+        }
         style={{ marginTop: normalize(10) }}
         onPress={onSubmit}
         isLoading={isLoading}

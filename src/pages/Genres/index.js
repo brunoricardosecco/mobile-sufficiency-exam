@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { FlatList, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { getGenres } from '../../store/genres/reducer';
 
@@ -11,6 +12,9 @@ import styles from './styles';
 export default function Genres({ navigation }) {
   // * STATES
   const { genres } = useSelector((state) => state.genres);
+
+  // * HOOKS
+  const { t } = useTranslation();
 
   // * ACTIONS
   const dispatch = useDispatch();
@@ -24,7 +28,7 @@ export default function Genres({ navigation }) {
   return (
     <View style={styles.container}>
       <Button
-        text="Adicione um novo gênero"
+        text={t('genres.addGenreButton')}
         onPress={() => navigation.navigate('AddGenre')}
       />
       <FlatList
