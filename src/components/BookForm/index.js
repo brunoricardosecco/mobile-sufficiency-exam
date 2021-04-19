@@ -1,9 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Alert, View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Picker } from '@react-native-picker/picker';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+
+import { getGenres } from '../../store/genres/reducer';
 
 import Input from '../Input';
 import Button from '../Button';
@@ -30,6 +32,10 @@ export default function BookForm({
 
   // * HOOKS
   const { t } = useTranslation();
+
+  // * ACTIONS
+  const dispatch = useDispatch();
+  const getGenresAsync = useCallback(() => dispatch(getGenres()), [dispatch]);
 
   // * FUNCTIONS
   const handleFillField = useCallback((name, value) => {
@@ -60,6 +66,10 @@ export default function BookForm({
 
     handleSubmit(fields);
   }, [fields, handleSubmit]);
+
+  useEffect(() => {
+    getGenresAsync();
+  }, []);
 
   return (
     <KeyboardAwareScrollView enableOnAndroid>
