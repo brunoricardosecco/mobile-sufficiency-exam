@@ -105,6 +105,15 @@ export default {
     },
     addGenre: 'Adicionar gênero',
     editGenre: 'Editar gênero',
+    about: {
+      title: 'Sobre',
+      author: 'Desenvolvedor',
+      subTitle:
+        'Projeto desenvolvido para o exame de suficiência da matéria de desenvolvimento de aplicações móveis da Universidade Técnológica Federal do Paraná',
+      appUsage: 'Uso do aplicativo',
+      usageText:
+        'O aplicativo possui funcionaliades de visualiazação, edição, adição e exclusão de livros, bem como possui as mesma funcionalidades para gêneros de livros. Na aba de livros, o usuário pode efetuar as ações de exclusão e leitura de livros, e para a funcionalidade de adição o aplicativo fornece um botão ao topo que levará o usuário a tela de adição de livro contendo o formulário de informações. Para a funcionalidade de edição, cada livro possui um botão de edição que leva o usuário a tela de formulário de livro par que as informações sejam alteradas e posteriormente salvas. O mesmo fluxo se repete para os gêneros de livros em sua aba no menu de baixo.',
+    },
     logout: 'Sair',
   },
 };

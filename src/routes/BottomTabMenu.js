@@ -7,6 +7,7 @@ import { signOut } from '../store/auth/reducer';
 
 import BooksStack from './BooksStack';
 import GenresStack from './GenresStack';
+import AboutStack from './AboutStack';
 
 export default function BottomTabMenu() {
   const BottomTab = createBottomTabNavigator();
@@ -28,6 +29,11 @@ export default function BottomTabMenu() {
         name="GenresTab"
         component={GenresStack}
         options={{ title: t('genres.title') }}
+      />
+      <BottomTab.Screen
+        name="AboutTab"
+        component={AboutStack}
+        options={{ title: t('about.title') }}
       />
       <BottomTab.Screen
         name={t('logout')}
