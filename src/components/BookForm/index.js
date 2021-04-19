@@ -136,7 +136,7 @@ export default function BookForm({
           >
             <Picker.Item label="Selecione um gênero" value="" />
             {genres.map((genre) => (
-              <Picker.Item label={genre.name} value={genre.id} />
+              <Picker.Item key={genre.id} label={genre.name} value={genre.id} />
             ))}
           </Picker>
         </View>

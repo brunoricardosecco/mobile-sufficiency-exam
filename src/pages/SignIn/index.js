@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Text, View, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { signIn } from '../../store/auth/reducer';
 
@@ -18,6 +19,9 @@ export default function SignIn({ navigation }) {
     password: '',
   });
   const { isLoading } = useSelector((states) => states.auth);
+
+  // * HOOKS
+  const { t } = useTranslation();
 
   // * ACTIONS
   const dispatch = useDispatch();
@@ -64,7 +68,7 @@ export default function SignIn({ navigation }) {
           <Text style={styles.title}>LibApp</Text>
           <Input
             name="email"
-            label="E-mail"
+            label={t('signIn.emailLabel')}
             autoCapitalize="none"
             onChangeText={handleFillField}
           />

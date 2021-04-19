@@ -8,6 +8,7 @@ import './configs/firebase';
 import { store } from './store';
 import Routes from './routes';
 import colors from './constants/colors';
+import './configs/internationalization';
 
 export default function App() {
   return (
